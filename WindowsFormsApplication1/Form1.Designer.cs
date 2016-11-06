@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.inputFileLabel = new System.Windows.Forms.LinkLabel();
@@ -37,6 +38,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.emailAdds = new System.Windows.Forms.TextBox();
+            this.notifyIcn = new System.Windows.Forms.NotifyIcon(this.components);
             this.SuspendLayout();
             // 
             // openFileDialog1
@@ -68,7 +72,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(153, 217);
+            this.button1.Location = new System.Drawing.Point(153, 257);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(89, 31);
             this.button1.TabIndex = 2;
@@ -121,13 +125,39 @@
             this.label3.Text = "Filling Year";
             this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Palatino Linotype", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(26, 203);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(111, 21);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Email Address";
+            // 
+            // emailAdds
+            // 
+            this.emailAdds.Location = new System.Drawing.Point(153, 203);
+            this.emailAdds.Name = "emailAdds";
+            this.emailAdds.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
+            this.emailAdds.Size = new System.Drawing.Size(209, 22);
+            this.emailAdds.TabIndex = 9;
+            this.emailAdds.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
+            // notifyIcn
+            // 
+            this.notifyIcn.Text = "Tax Report is Generating";
+            this.notifyIcn.Visible = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(434, 334);
+            this.Controls.Add(this.emailAdds);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -158,6 +188,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox emailAdds;
+        private System.Windows.Forms.NotifyIcon notifyIcn;
     }
 }
 

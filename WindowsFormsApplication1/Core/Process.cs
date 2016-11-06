@@ -53,8 +53,12 @@ namespace WindowsFormsApplication1.Core
                     {
                         fillingStatus.Add(new EfillingDetails(user, "LOGIN SUCCESS", "Initiated", listofmsg));
                     }
-                    
-                }
+                    else
+                    {
+                    fillingStatus.Add(new EfillingDetails(user, "LOGIN SUCCESS", "No Initiated", ""));
+                    }
+
+            }
                 
             
             WriteToFile();
@@ -64,7 +68,7 @@ namespace WindowsFormsApplication1.Core
 
         private void WriteToFile()
         {
-            Debug.WriteLine(fillingStatus[0].initiatedList);
+           
             IExcelReader.WriteToExcel(outputDataFile, fillingStatus);
         }
         private string DoAllNavigationtoPrint()
@@ -104,9 +108,16 @@ namespace WindowsFormsApplication1.Core
 
       private void KillChrome()
         {
-            foreach (var process in Process.GetProcessesByName("chromedriver"))
+            foreach (var process in Process.GetProcessesByName("chrome"))
             {
-                process.Kill();
+                try {
+
+                    process.Kill();
+
+                } catch (Exception e)
+                {
+                    break;
+                }
             }
         }
     }

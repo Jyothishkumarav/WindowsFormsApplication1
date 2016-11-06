@@ -64,11 +64,13 @@ namespace WindowsFormsApplication1
             string fileName = inputFileLabel.Text;
             string fileNameop = outputLabel.Text;
             string year = comboBox1.SelectedItem.ToString();
+           
             if(fileName.ToLower().Contains("xlsx") && fileNameop.ToLower().Contains("xlsx") && year.Length!=0)
             {
                 EFiller filler = new EFiller(fileName, fileNameop, year);
                 filler.DoLogin();
-                MessageBox.Show("Data generated successfully");
+                MessageBox.Show("Data generated successfully","Tax-Report",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                SendEmail();
 
             }
             else
@@ -77,6 +79,20 @@ namespace WindowsFormsApplication1
             }
             
             //IExcelReader.ReadExcelData(fileName);
+        }
+
+        private void SendEmail()
+         {
+            if (emailAdds.Text.Length > 0)
+            {
+                notifyIcn.Text = "Sending emial";
+                if (emailAdds.Text.Contains(";"))
+                {
+                    string emailAddsText=emailAdds.Text.Replace(';',',');
+                    MailSender.SendEmail(emailAddsText, outputLabel.Text);
+                    notifyIcn.Text = "Mail has sent";
+                }
+            }
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -105,6 +121,11 @@ namespace WindowsFormsApplication1
         }
 
         private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
         }
