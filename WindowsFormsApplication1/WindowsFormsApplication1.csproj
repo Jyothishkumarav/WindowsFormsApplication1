@@ -87,6 +87,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\DriverFactory..cs" />
+    <Compile Include="Core\MacVerification.cs" />
     <Compile Include="Core\MailSender.cs" />
     <Compile Include="Core\Process.cs" />
     <Compile Include="Core\WaitingHelper.cs" />
@@ -143,6 +144,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="chromedriver.exe" />
+    <None Include="Resources\logo.png" />
     <None Include="Resources\tax-planning2.jpg" />
     <None Include="Resources\tax-planning1.jpg" />
     <None Include="Resources\tax-planning.jpg" />

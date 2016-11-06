@@ -69,6 +69,56 @@ namespace WindowsFormsApplication1.Utitity
             Release();
         }
         
+
+        public static string CreateOutPutExcelFile(string ipFileNamePath)
+        {
+            try
+            {
+                string fileName = ipFileNamePath.Substring(ipFileNamePath.LastIndexOf("\\") + 1);
+                string directory = ipFileNamePath.Substring(0, ipFileNamePath.Length - fileName.Length);
+                string timeStamp= Convert.ToDateTime(DateTime.Now.ToString()).ToString("dd_MM-_yyyy_hh_mm_tt");
+                string outputFile = directory + "TaxStatus-"+ timeStamp+".xlsx";
+                Excel.Application xlApp = new Microsoft.Office.Interop.Excel.Application();
+
+                if (xlApp == null)
+                {
+                    // MessageBox.Show("Excel is not properly installed!!");
+                    return "";
+                }
+
+
+                Excel.Workbook xlWorkBook;
+                Excel.Worksheet xlWorkSheet;
+                object misValue = System.Reflection.Missing.Value;
+
+                xlWorkBook = xlApp.Workbooks.Add(misValue);
+                xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
+
+                xlWorkSheet.Cells[1, 1] = "User Name";
+                xlWorkSheet.Cells[1, 2] = "Status";
+                xlWorkSheet.Cells[1, 3] = "Comment";
+
+                xlWorkBook.SaveAs(outputFile, Microsoft.Office.Interop.Excel.XlFileFormat.xlWorkbookDefault, Type.Missing, Type.Missing,
+        false, false, Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlNoChange,
+        Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
+
+                xlWorkBook.Close(true, misValue, misValue);
+                xlApp.Quit();
+                return outputFile;
+            }
+            catch (Exception ex)
+            {
+                return "";
+            }
+
+           // Marshal.ReleaseComObject(xlWorkSheet);
+            //Marshal.ReleaseComObject(xlWorkBook);
+            //Marshal.ReleaseComObject(xlApp);
+
+
+
+        }
+
         private static void Release()
         {
             // xlWorkBook.Save();

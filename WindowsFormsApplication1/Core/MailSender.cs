@@ -9,10 +9,10 @@ namespace WindowsFormsApplication1.Core
 {
    public static class MailSender
     {
-        private const string MAIL_FROM = "jyothishkumarav@gmail.com";
+        private const string MAIL_FROM = "alzonesoftware.taxcalculator@gmail.com";
         private const string MAIL_BODY = "Tax-Status Report";
-        private const string USER_NAME = "jyothishkumarav@gmail.com";
-        private const string USER_PWD = "Dec@2012";
+        private const string USER_NAME = "alzonesoftware.taxcalculator@gmail.com";
+        private const string USER_PWD = "AnuLijith@2016";
         
         public static bool SendEmail(string address,string filePath)
         {

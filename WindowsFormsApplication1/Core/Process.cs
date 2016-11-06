@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -32,34 +33,39 @@ namespace WindowsFormsApplication1.Core
            IList<UserLogin> users= IExcelReader.ReadExcelData(inputDataFile);
            LoginPage UserLoginPage = new LoginPage(driver);
             string listofmsg="";
-           foreach (UserLogin user in users)
+            foreach (UserLogin user in users)
             {
-                var loginInfoText = UserLoginPage.SetLoginData(user.userName, user.passWord);
-                if (loginInfoText.Contains("User Does not Exists"))
-                {
-                    fillingStatus.Add(new EfillingDetails(user, "INVALID LOGIN", ""));
-                    continue;
-                }
-                else if (loginInfoText.ToLower().Contains("register your mobile"))
-                {
-                    listofmsg = DoNavigationForMobileVerificationCust();
-                }
-                else
-                {
+                try {
+                    var loginInfoText = UserLoginPage.SetLoginData(user.userName, user.passWord);
+                    if (loginInfoText.Contains("User Does not Exists"))
+                    {
+                        fillingStatus.Add(new EfillingDetails(user, "INVALID LOGIN", ""));
+                        continue;
+                    }
+                    else if (loginInfoText.ToLower().Contains("register your mobile"))
+                    {
+                        listofmsg = DoNavigationForMobileVerificationCust();
+                    }
+                    else
+                    {
 
-                    listofmsg = DoAllNavigationtoPrint();
-                 }
-                    if (listofmsg.Length>0)
+                        listofmsg = DoAllNavigationtoPrint();
+                    }
+                    if (listofmsg.Length > 0)
                     {
                         fillingStatus.Add(new EfillingDetails(user, "LOGIN SUCCESS", "Initiated", listofmsg));
                     }
                     else
                     {
-                    fillingStatus.Add(new EfillingDetails(user, "LOGIN SUCCESS", "No Initiated", ""));
+                        fillingStatus.Add(new EfillingDetails(user, "LOGIN SUCCESS", "No Initiated", ""));
                     }
 
-            }
-                
+                }catch(Exception e){
+
+                    driver.Url= ReadSettings.GetuRL();
+                    fillingStatus.Add(new EfillingDetails(user, "Error occured", "Error", "Error in processing"+e.Message));
+                }
+            }    
             
             WriteToFile();
             KillChrome();
